@@ -1,11 +1,11 @@
 import express, { Router } from 'express';
-import { createToDo, deleteToDo, getToDos, updateToDo } from '../controller/ToDo.controller';
+import { createToDo, deleteToDo, getToDos, updateToDo } from '../controller/ToDo.controller.js';
 
 const router = express.Router();
 
 router.get('/', getToDos);
-router.get('/', createToDo);
-router.get('/:id', updateToDo);
-router.get('/:id', deleteToDo);
+router.post('/', createToDo);
+router.put('/:id', updateToDo);
+router.delete('/:id', deleteToDo);
 
-module.exports = router;
+export default router;
