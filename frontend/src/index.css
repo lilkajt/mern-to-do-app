@@ -1,5 +1,11 @@
-html, body, #root {
-    height: 100%;
+html{
+    min-height: 100vh;
+    background-color: #fff;
+}
+
+html.dark, body.dark, #root.dark {
+    background-color: #212121;
+    color: white;
 }
 
 @tailwind base;
