@@ -2,17 +2,21 @@ import mongoose from "mongoose";
 import ToDo from "../models/ToDo.model.js";
 
 export const getToDos = async (req, res) => {
-    const todos = await ToDo.find();
-    res.send(todos);
+    try {
+        const todos = await ToDo.find({});
+        res.status(200).json({success: true, data: todos});
+    } catch (error) {
+        console.log(`Error in get toDos: ${error.message}`)
+        res.status(500).json({success: false, message: error.message});
+    }
 }
 
 export const createToDo = async (req, res) => {
-    const body = req.body;
-
-    if ( body.text == ''){
-        return res.status(400).send({message: "Text is required"});
+    const toDo = req.body;
+    if ( toDo.text == ''){
+        return res.status(400).json({success: false, message: "Text is required"});
     }
-    const newToDo = new ToDo(body);
+    const newToDo = new ToDo(toDo);
     try {
         await newToDo.save();
         res.status(201).json({success: true, data: newToDo});
@@ -24,18 +28,18 @@ export const createToDo = async (req, res) => {
 
 export const updateToDo = async (req, res) => {
     const { id } = req.params;
-    const body = req.body;
+    const toDo = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).send({message: "Invalid id"});
+        return res.status(404).send("No todo with this id");
     }
 
-    if ( body.text == ''){
-        return res.status(400).send({message: "Text is required"});
+    if ( toDo.text.trim() === ''){
+        return res.status(400).send("Text is required");
     }
 
     try {
-        const updatedToDo = await ToDo.findByIdAndUpdate(id, body, {new: true});
+        const updatedToDo = await ToDo.findByIdAndUpdate(id, toDo, {new: true});
         res.status(200).json({success: true, data: updatedToDo});
     } catch (error) {
         console.log(`Error in update todo: ${error.message}`);
@@ -47,7 +51,7 @@ export const deleteToDo = async (req, res) => {
     const { id } = req.params;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).send({message: "Invalid id"});
+        return res.status(404).send("No todo with this id");
     }
 
     try {
