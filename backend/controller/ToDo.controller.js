@@ -55,7 +55,7 @@ export const deleteToDo = async (req, res) => {
     }
 
     try {
-        await ToDo.findByIdAndRemove(id);
+        await ToDo.findByIdAndDelete(id);
         res.status(200).json({success: true, message: "ToDo deleted successfully"});
     } catch (error) {
         console.log(`Error in delete todo: ${error.message}`);
