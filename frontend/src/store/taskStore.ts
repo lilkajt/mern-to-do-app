@@ -42,7 +42,7 @@ export const useTaskStore = create<TaskStore>((set) => ({
                 return task;
             }),
         }));
-        return { success: true, message: 'Task updated successfully' };
+        return { success: true, message: 'Task updated' };
     },
     deleteTask: async (_id: string) => {
         const response = await axios.delete(`/api/todos/${_id}`);
@@ -50,6 +50,6 @@ export const useTaskStore = create<TaskStore>((set) => ({
             return { success: false, message: "Task couldnt be deleted"};
         }
         set((state) => ({tasks: state.tasks.filter((task) => task._id !== _id)}));
-        return { success: true, message: 'Task deleted successfully' };
+        return { success: true, message: 'Task deleted' };
     },
 }));

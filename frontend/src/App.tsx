@@ -22,7 +22,7 @@ const App: React.FC = () => {
 
   return (
     <>
-      <Navbar onAddTask={() => {}} toggleTheme={toggleTheme} theme={theme} />
+      <Navbar toggleTheme={toggleTheme} theme={theme} />
       <Routes>
         <Route path='/' element={<HomePage />}/>
       </Routes>

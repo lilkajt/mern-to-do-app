@@ -1,10 +1,10 @@
 html{
     min-height: 100vh;
-    background-color: #fff;
+    background-color: #e7e5e4;
 }
 
 html.dark, body.dark, #root.dark {
-    background-color: #212121;
+    background-color: #1e293b;
     color: white;
 }
 
