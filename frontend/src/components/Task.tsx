@@ -6,7 +6,7 @@ import { FaCheck } from "react-icons/fa";
 interface TaskProps {
   task: {
     _id: string;
-    text: string;
+    text?: string;
     completed: boolean;
   };
   setToast: (toast: { message: string; type: 'success' | 'error' } | null) => void;
